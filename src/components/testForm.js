@@ -21,18 +21,35 @@ import { fetchUser,
 
     componentDidMount = () => {
         this.props.fetchUser()
-    }
+    };
+
+    componentDidUpdate = () => {
+        if(this.props.timer < 1) {
+            clearInterval(this.state.intervalID);
+        }
+    };
 
     componentWillUnmount = () => {
         this.props.resetTest();
+    };
+
+    renderTime = (time) => {
+        return `${time.getMonth()+1}/${time.getDay()}/${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
     }
 
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 <div className="row mt-3">
+                    <div className = "col-md-auto">
+                        <p><strong>Test Administered By:</strong> {this.props.user}</p>
+                    </div>
+                    {this.props.startTime ? <div className="col-md-auto">
+                    <p><strong>Test Initiated:</strong> {this.renderTime(this.props.startTime)}</p>
+                    </div> : null}
+                </div>
+                <div className="row"> 
                     <div className="col-md-auto mr-2">
                         <div className="row">
                             {!this.props.testOn ? <div className="col">
