@@ -1,3 +1,6 @@
+import axios from 'axios';
+const url = process.env.REACT_APP_API_URL;
+
 export const START_TEST = "START_TEST";
 export const TICK_UP = "TICK_UP";
 export const RESET_TEST = "RESET_TEST";
@@ -61,5 +64,35 @@ export const testEnded = () => {
         dispatch({
             type: TEST_ENDED
         })
+    }
+};
+
+export function submitTest(userId,score, attempts, testStart, testSubmitted) {
+    return async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const patientID = this.props.match.params.patient;
+            await axios(`${url}/placeholder`,
+            {
+                method: "post",
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                data: {
+                    userId: userId,
+                    patientID: patientID,
+                    cognitiveTestType: 'Naming',
+                    version: 'animals-v1',
+                    testScore: score,
+                    namingTestAttempts: attempts,
+                    testStart: testStart,
+                    testSubmitted: testSubmitted
+                }
+              });
+        } catch (err) {
+            console.err(err);
+        }
     }
 };
