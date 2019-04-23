@@ -2,7 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
+import { fetchUser, 
+        startTest, 
+        tickUp, 
+        resetTest, 
+        resetTickUp, 
+        testBegan, 
+        testEnded } from '../actions/testForm';
 
  class TestForm extends Component {
     constructor(props) {
@@ -23,6 +29,7 @@ import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
 
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <div className="row mt-3">
@@ -30,6 +37,7 @@ import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
                         <div className="row">
                             {!this.props.testOn ? <div className="col">
                                 <button type="button" onClick={() => {
+                                    this.props.testBegan()
                                     this.setState({intervalID: setInterval(this.props.startTest, 1000)})}} 
                                     className="btn btn-primary">Begin</button>
                             </div> : 
@@ -45,6 +53,7 @@ import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
                                 <a href="#" className="text-danger" onClick={(event) => {
                                     event.preventDefault();
                                     clearInterval(this.state.intervalID);
+                                    this.props.resetTickUp()
                                     this.props.resetTest()
                                 }}>Stop/Reset</a>
                             </div> 
@@ -65,7 +74,7 @@ import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
                 </div>
                 {this.props.timer < 1 ?<div className="row">
                     <div className="col-md-auto">
-                        <button type="button" className="btn btn-primary"> SUBMIT</button>
+                        <button type="button" onClick={() => this.props.testEnded() } className="btn btn-primary"> SUBMIT</button>
                     </div>
                 </div> : null}
             </div>
@@ -76,7 +85,14 @@ import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
 const mapStateToProps = (state) => (state.form)
 
   const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({fetchUser, startTest, tickUp, resetTest}, dispatch)
+    return bindActionCreators(
+        {fetchUser, 
+        startTest, 
+        tickUp, 
+        resetTest, 
+        resetTickUp, 
+        testBegan, 
+        testEnded}, dispatch)
   }
 
   export default connect(mapStateToProps, mapDispatchToProps)(TestForm);
