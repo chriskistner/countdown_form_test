@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { startTest, tickUp, resetTest } from '../actions/testForm';
+import { fetchUser, startTest, tickUp, resetTest } from '../actions/testForm';
 
  class TestForm extends Component {
     constructor(props) {
@@ -12,6 +12,15 @@ import { startTest, tickUp, resetTest } from '../actions/testForm';
             intervalID: null
         }
     };
+
+    componentDidMount = () => {
+        this.props.fetchUser()
+    }
+
+    componentWillUnmount = () => {
+        this.props.resetTest();
+    }
+
 
     render() {
         return (
@@ -67,7 +76,7 @@ import { startTest, tickUp, resetTest } from '../actions/testForm';
 const mapStateToProps = (state) => (state.form)
 
   const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({startTest, tickUp, resetTest}, dispatch)
+    return bindActionCreators({fetchUser, startTest, tickUp, resetTest}, dispatch)
   }
 
   export default connect(mapStateToProps, mapDispatchToProps)(TestForm);
