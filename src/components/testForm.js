@@ -17,7 +17,7 @@ import { startTest } from '../actions/testForm';
         return (
             <div className="row mt-3">
                 <div className="col-md-auto mr-2">
-                <button type="button" onClick={() => this.props.startTest()} class="btn btn-primary">Begin</button>
+                <button type="button" onClick={() => setInterval(this.props.startTest, 1000)} class="btn btn-primary">Begin</button>
                 </div>
                 <div className="col-md-auto">
                     <h4>{this.props.timer} Seconds Remaining</h4>
