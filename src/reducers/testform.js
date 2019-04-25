@@ -2,12 +2,13 @@ import {START_TEST, TICK_UP, RESET_TEST, RESET_TICK_UP, FETCH_USER, TEST_BEGAN, 
 
 const initialState = {
     user: null,
-    timer: 5,
+    timer: 60,
     testOn: false,
     score: 0,
-    resetNum: 0,
+    attempts: 1,
     startTime: null,
     endTime: null,
+    testComp: false
 };
 
 export default function testForm(state=initialState, action) {
@@ -16,12 +17,15 @@ export default function testForm(state=initialState, action) {
             return {...state, user: action.payload};
         
         case TEST_BEGAN:
-            const testInit = new Date();
-            return {...state, startTime: testInit};
-        
-            case TEST_ENDED:
+            if (!state.startTime) {
+                const testInit = new Date();
+                return {...state, startTime: testInit};
+            }
+            return state
+
+        case TEST_ENDED:
             const testConc = new Date();
-            return {...state, endTime: testConc};
+            return {...state, endTime: testConc, testComp: true};
 
         case START_TEST:
             let newTime;
@@ -32,10 +36,10 @@ export default function testForm(state=initialState, action) {
             return {...state, score: state.score +=1};
 
         case RESET_TICK_UP:
-            return {...state, resetNum: state.resetNum +=1};
+            return {...state, attempts: state.attempts +=1};
 
         case RESET_TEST:
-            return state = initialState;
+            return state = {...state, timer: 60, testOn: false, score: 0, testComp: false};
 
         default:
             return state;
