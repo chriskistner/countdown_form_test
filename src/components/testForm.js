@@ -10,8 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CogAssessment from './cogAssessment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser, 
-        startTest, 
+import {startTest, 
         tickUp, 
         resetTest, 
         resetTickUp, 
@@ -122,8 +121,7 @@ const mapStateToProps = (state) => (state.form)
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
-        {fetchUser, 
-        startTest, 
+        {startTest, 
         tickUp, 
         resetTest, 
         resetTickUp, 

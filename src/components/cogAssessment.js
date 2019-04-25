@@ -6,8 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser, 
-        startTest, 
+import { startTest, 
         tickUp, 
         resetTest, 
         resetTickUp, 
@@ -38,7 +37,6 @@ const styles = theme => ({
     };
 
     componentDidMount = () => {
-        this.props.fetchUser()
     };
 
     componentDidUpdate = () => {
@@ -140,8 +138,7 @@ const mapStateToProps = (state) => (state.form)
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
-        {fetchUser, 
-        startTest, 
+        {startTest, 
         tickUp, 
         resetTest, 
         resetTickUp, 

@@ -1,7 +1,7 @@
 import {START_TEST, TICK_UP, RESET_TEST, RESET_TICK_UP, FETCH_USER, TEST_BEGAN, TEST_ENDED} from '../actions/testForm';
 
 const initialState = {
-    timer: 60,
+    timer: 10,
     testOn: false,
     score: 0,
     attempts: 1,
@@ -36,7 +36,7 @@ export default function testForm(state=initialState, action) {
             return {...state, attempts: state.attempts +=1};
 
         case RESET_TEST:
-            return state = {...state, timer: 60, testOn: false, score: 0, testComp: false};
+            return state = {...state, timer: 10, testOn: false, score: 0, testComp: false};
 
         default:
             return state;
