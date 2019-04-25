@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import TestForm from './components/testForm';
 
 class App extends Component {

@@ -10,7 +10,7 @@ export const TEST_BEGAN = "TEST_BEGAN";
 export const TEST_ENDED = "TEST_ENDED";
 
 export const fetchUser= () => {
-    const user = localStorage.getItem('user') || "Test Doctor";
+    const user = localStorage.getItem('user') || "Dr. Test"
     return (dispatch) => {
         dispatch({
             type: FETCH_USER,
