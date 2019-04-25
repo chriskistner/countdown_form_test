@@ -1,7 +1,6 @@
 import {START_TEST, TICK_UP, RESET_TEST, RESET_TICK_UP, FETCH_USER, TEST_BEGAN, TEST_ENDED} from '../actions/testForm';
 
 const initialState = {
-    user: null,
     timer: 60,
     testOn: false,
     score: 0,
@@ -13,9 +12,7 @@ const initialState = {
 
 export default function testForm(state=initialState, action) {
     switch(action.type) {
-        case FETCH_USER:
-            return {...state, user: action.payload};
-        
+
         case TEST_BEGAN:
             if (!state.startTime) {
                 const testInit = new Date();

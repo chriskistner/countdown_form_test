@@ -47,7 +47,7 @@ const styles = theme => ({
     };
 
     componentDidMount = () => {
-        this.props.fetchUser()
+
     };
 
     componentDidUpdate = () => {

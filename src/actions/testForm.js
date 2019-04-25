@@ -9,15 +9,6 @@ export const RESET_TICK_UP = "RESET_TICK_UP";
 export const TEST_BEGAN = "TEST_BEGAN";
 export const TEST_ENDED = "TEST_ENDED";
 
-export const fetchUser= () => {
-    const user = localStorage.getItem('user') || "Dr. Test"
-    return (dispatch) => {
-        dispatch({
-            type: FETCH_USER,
-            payload: user
-        })
-    }
-};
 
 export const startTest = () => {
     return (dispatch) => {
@@ -67,10 +58,11 @@ export const testEnded = () => {
     }
 };
 
-export function submitTest(userId,score, attempts, testStart, testSubmitted) {
+export function submitTest(score, attempts, testStart, testSubmitted) {
     return async () => {
         try {
             const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user')
             const patientID = this.props.match.params.patient;
             await axios(`${url}/placeholder`,
             {
@@ -81,14 +73,14 @@ export function submitTest(userId,score, attempts, testStart, testSubmitted) {
                   'Authorization': `Bearer ${token}`
                 },
                 data: {
-                    userId: userId,
-                    patientID: patientID,
+                    userId: user,
+                    uuid: patientID,
                     cognitiveTestType: 'Naming',
                     version: 'animals-v1',
-                    testScore: score,
-                    namingTestAttempts: attempts,
-                    testStart: testStart,
-                    testSubmitted: testSubmitted
+                    score: score,
+                    attempts: attempts,
+                    start: testStart,
+                    submission: testSubmitted
                 }
               });
         } catch (err) {
