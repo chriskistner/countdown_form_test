@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CogAssessment from './cogAssessment';
+import FunctionalAssessment from './functionalAssessment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {startTest, 
@@ -41,7 +42,8 @@ const styles = theme => ({
 
         this.state = {
             intervalID: null,
-            modal: false
+            modal: false,
+            assessment: null,
         }
     };
 
@@ -67,22 +69,28 @@ const styles = theme => ({
 
     renderTime = (time) => {
         if(time) {
-            return `${time.getMonth()+1}/${time.getDay()}/${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`}
+            return `${time.getMonth()+1}/${time.getDay()}/${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()} ${time.getTimezoneOffset()}`}
     };
+
+    renderModal = (Component) => {
+        this.setState({
+            assessment: Component
+        })
+    }
 
     render() {
         const { classes } = this.props;
-        console.log(this.props.testComp)
         return (
             <div>
-                <Button onClick={() => {this.toggleModal(); this.props.resetTest()}}>Cognitive Assessment</Button>
+                <Button onClick={() => {this.renderModal(CogAssessment); this.toggleModal(); this.props.resetTest()}}>Cognitive Assessment</Button>
+                <Button onClick={() => {this.renderModal(FunctionalAssessment); this.toggleModal(); this.props.resetTest()}}>Functional Assessment</Button>
                     <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                     open={this.state.modal}
                     onClose={() => {this.toggleModal()}}
                     >
-                        <CogAssessment toggle= {this.toggleModal}/>
+                        <this.state.assessment toggle= {this.toggleModal}/>
                     </Modal>
                 {this.props.testComp ?
                 <Card className={classes.card}>

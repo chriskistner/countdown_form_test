@@ -27,7 +27,7 @@ const styles = theme => ({
   }
 });
 
- class CogAssessment extends Component {
+ class FunctionalAssessment extends Component {
     constructor(props) {
         super(props)
 
@@ -52,7 +52,7 @@ const styles = theme => ({
                     <Grid container spacing={8} alignItems="flex-start" justify="space-between">
                         <Grid item xs={12}>
                             <Typography variant="h6" id="form-title">
-                                Cognitive Assement
+                                Functional Assessment
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -124,7 +124,7 @@ const styles = theme => ({
     }
 };
 
-CogAssessment.propTypes = {
+FunctionalAssessment.propTypes = {
     classes: PropTypes.object.isRequired,
   };
 
@@ -141,6 +141,6 @@ const mapStateToProps = (state) => (state.form)
         testEnded}, dispatch)
   };
 
-const CogAssessmentWrapped = withStyles(styles)(CogAssessment)
+const FunctionalAssessmentWrapped = withStyles(styles)(FunctionalAssessment)
 
-export default connect(mapStateToProps, mapDispatchToProps)(CogAssessmentWrapped);
+export default connect(mapStateToProps, mapDispatchToProps)(FunctionalAssessmentWrapped);
