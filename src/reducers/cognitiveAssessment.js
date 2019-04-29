@@ -1,4 +1,4 @@
-import {START_TEST, TICK_UP, RESET_TEST, RESET_TICK_UP, FETCH_USER, TEST_BEGAN, TEST_ENDED} from '../actions/testForm';
+import {START_TEST, TICK_UP, RESET_TEST, RESET_TICK_UP, TEST_BEGAN, TEST_ENDED} from '../actions/cognitiveAssessment';
 
 const initialState = {
     timer: 10,
@@ -10,7 +10,7 @@ const initialState = {
     testComp: false
 };
 
-export default function testForm(state=initialState, action) {
+export default function cogForm(state=initialState, action) {
     switch(action.type) {
 
         case TEST_BEGAN:

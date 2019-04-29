@@ -16,7 +16,7 @@ import {startTest,
         resetTest, 
         resetTickUp, 
         testBegan, 
-        testEnded } from '../actions/testForm';
+        testEnded } from '../actions/cognitiveAssessment';
 
 const styles = theme => ({
   paper: {
@@ -125,7 +125,7 @@ TestForm.propTypes = {
   };
 
 
-const mapStateToProps = (state) => (state.form)
+const mapStateToProps = (state) => (state.cog)
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
