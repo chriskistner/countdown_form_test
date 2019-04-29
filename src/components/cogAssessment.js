@@ -37,6 +37,7 @@ const styles = theme => ({
     };
 
     componentDidMount = () => {
+        this.props.resetTest();
     };
 
     componentDidUpdate = () => {

@@ -52,13 +52,7 @@ const styles = theme => ({
     };
 
     componentDidUpdate = () => {
-        if(this.props.timer < 1) {
-            clearInterval(this.state.intervalID);
-        }
-    };
 
-    componentWillUnmount = () => {
-        this.props.resetTest();
     };
 
     toggleModal = () => {
@@ -92,23 +86,23 @@ const styles = theme => ({
                     >
                         <this.state.assessment toggle= {this.toggleModal}/>
                     </Modal>
-                {this.props.testComp ?
+                {this.props.cognitive.testComp ?
                 <Card className={classes.card}>
                     <CardContent>
                         <Typography variant= "h6" color="textSecondary" gutterBottom>
                             Cognitive Assessment Results
                         </Typography>
                         <Typography variant="body1">
-                            <strong>Test Started:</strong> {this.renderTime(this.props.startTime)}
+                            <strong>Test Started:</strong> {this.renderTime(this.props.cognitive.startTime)}
                         </Typography>
                         <Typography variant="body1">
-                            <strong>Date Submitted:</strong> {this.renderTime(this.props.endTime)}
+                            <strong>Date Submitted:</strong> {this.renderTime(this.props.cognitive.endTime)}
                         </Typography>
                         <Typography variant="body1">
-                            <strong>Score:</strong> {this.props.score}
+                            <strong>Score:</strong> {this.props.cognitive.score}
                         </Typography>
                         <Typography variant="body1">
-                            <strong>Attempts:</strong> {this.props.attempts}
+                            <strong>Attempts:</strong> {this.props.cognitive.attempts}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -125,7 +119,12 @@ TestForm.propTypes = {
   };
 
 
-const mapStateToProps = (state) => (state.cog)
+const mapStateToProps = (state) => {
+    return {
+        cognitive: state.cog,
+        functional: state.functional
+    }
+}
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(

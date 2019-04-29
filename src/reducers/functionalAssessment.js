@@ -1,4 +1,4 @@
-import {NEXT_QUESTION} from '../actions/functionalAssessment';
+import {NEXT_QUESTION, SCORE_QUESTION} from '../actions/functionalAssessment';
 
 const assessment= [
     {number: 1, text: "Writing checks, paying bills, balancing checkbook", score: null},
@@ -16,7 +16,8 @@ const assessment= [
 
 const initialState = {
     assessment: assessment,
-    question: 1,
+    question: assessment[0],
+    currentQuestion: 0,
     score: 0,
     attempts: 1,
     startTime: null,
@@ -28,8 +29,13 @@ export default function functionForm(state=initialState, action) {
     switch(action.type) {
 
         case NEXT_QUESTION:
-            let nextQuestion = state.question += 1
-            return {...state, question: nextQuestion}
+            let nextQuestion = state.currentQuestion += 1
+            return {...state, question: assessment[nextQuestion]}
+
+        case SCORE_QUESTION:
+            const updatedAssessment = assessment;
+            updatedAssessment[state.currentQuestion].score = action.payload
+            return {...state, assessment: updatedAssessment}
 
         default:
             return state;
