@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FilledInput from '@material-ui/core/FilledInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -61,6 +55,7 @@ const styles = theme => ({
       };
 
     componentDidUpdate = () => {
+
     };
 
     render() {
@@ -76,7 +71,7 @@ const styles = theme => ({
                             </Grid>
                             <Grid item xs={6}>
                                 {
-                                    <Typography variant="h6">{this.props.question.text}</Typography>
+                                    <Typography variant="body1">{this.props.question.text}</Typography>
                                 }
                             </Grid>
                             <Grid item xs={6}>
@@ -94,7 +89,7 @@ const styles = theme => ({
                                     <MenuItem value={0}>Never did [the activity] but could do now = 0</MenuItem>
                                     <MenuItem value = {1}>Never did and would have difficulty now = 1 </MenuItem>
                                 </Select>
-                                <FormHelperText>Select the aptitude level most in line with patient's abilities</FormHelperText>
+                                <FormHelperText>Choose option most in line with patient's abilities</FormHelperText>
                             </Grid>
                         </Grid>
                         <Grid container spacing={8}>
@@ -102,15 +97,17 @@ const styles = theme => ({
                             {this.state.score !== '' ? 
                                 <Button variant="contained" onClick={() => {
                                     this.props.scoreQuestion(this.state.score);
-                                    this.props.nextQuestion()}} 
+                                    this.props.nextQuestion();
+                                    this.setState({
+                                        score: ''
+                                    })
+                                }}
                                     color="primary" 
                                     className={classes.button}>
                                         Next Question
                                 </Button> 
                                 :
-                                <Button disabled variant="contained" onClick={() => {
-                                    this.props.scoreQuestion(this.state.score);
-                                    this.props.nextQuestion()}} 
+                                <Button disabled variant="contained"
                                     color="primary" 
                                     className={classes.button}>
                                         Next Question
