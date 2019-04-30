@@ -51,10 +51,6 @@ const styles = theme => ({
 
     };
 
-    componentDidUpdate = () => {
-
-    };
-
     toggleModal = () => {
         this.setState({
             modal: !this.state.modal

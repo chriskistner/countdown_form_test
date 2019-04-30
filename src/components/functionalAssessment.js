@@ -11,7 +11,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
     nextQuestion,
-    scoreQuestion
+    scoreQuestion,
+    resetTest
 } from '../actions/functionalAssessment';
 
 const styles = theme => ({
@@ -64,14 +65,17 @@ const styles = theme => ({
                 <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -50%)`,}} className={classes.paper}>
                     <form className={classes.root} autoComplete="off">
                         <Grid container spacing={8} alignItems="flex-start" justify="space-between">
-                            <Grid item xs={12}>
+                            <Grid item xs={9}>
                                 <Typography variant="h6" id="form-title">
                                     Functional Assessment
                                 </Typography>
                             </Grid>
+                            <Grid item xs={3}>
+                                <Typography> Question {this.props.currentQuestion + 1}/{this.props.assessment.length}</Typography>
+                            </Grid>
                             <Grid item xs={6}>
                                 {
-                                    <Typography variant="body1">{this.props.question.text}</Typography>
+                                    <Typography variant="body1" style={{marginTop: 4, marginLeft: 12}}>{this.props.question.text}</Typography>
                                 }
                             </Grid>
                             <Grid item xs={6}>
@@ -80,8 +84,9 @@ const styles = theme => ({
                                     displayEmpty
                                     name="question-select"
                                     className={classes.selectEmpty}
+                                    style = {{marginTop: 0, marginLeft: 8}}
                                     >
-                                    <MenuItem value="">Select Aptitude Level</MenuItem>
+                                    <MenuItem value="" disabled>Select Aptitude Level</MenuItem>
                                     <MenuItem value={3}>Dependent = 3</MenuItem>
                                     <MenuItem value={2}>Requires assistance = 2</MenuItem>
                                     <MenuItem value={1}>Has difficulty but does by self = 1</MenuItem>
@@ -89,11 +94,18 @@ const styles = theme => ({
                                     <MenuItem value={0}>Never did [the activity] but could do now = 0</MenuItem>
                                     <MenuItem value = {1}>Never did and would have difficulty now = 1 </MenuItem>
                                 </Select>
-                                <FormHelperText>Choose option most in line with patient's abilities</FormHelperText>
+                                <FormHelperText style = {{marginLeft: 8}}>Choose option most in line with patient's abilities</FormHelperText>
                             </Grid>
                         </Grid>
                         <Grid container spacing={8}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
+                                <Button color="secondary" style={{marginBottom: 0, marginTop: 16}} onClick={() => {
+                                    this.props.resetTest()}} 
+                                    className={classes.button}>
+                                    Restart/Test
+                                </Button>
+                            </Grid>
+                            <Grid item xs={6} alignItems="flex-end" justify="space-between">
                             {this.state.score !== '' ? 
                                 <Button variant="contained" onClick={() => {
                                     this.props.scoreQuestion(this.state.score);
@@ -131,7 +143,8 @@ const mapStateToProps = (state) => (state.functional)
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {nextQuestion,
-        scoreQuestion
+        scoreQuestion,
+        resetTest
         }, dispatch)
   };
 
