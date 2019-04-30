@@ -11,7 +11,7 @@ import { startTest,
         resetTest, 
         resetTickUp, 
         testBegan, 
-        testEnded } from '../actions/cognitiveAssessment';
+        testEnded } from '../../actions/cognitiveAssessment';
 
 const styles = theme => ({
   paper: {
