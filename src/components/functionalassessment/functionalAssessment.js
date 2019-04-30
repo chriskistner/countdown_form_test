@@ -60,50 +60,72 @@ const styles = theme => ({
         return (
                 <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -25%)`}} className={classes.paper}>
                     <form className={classes.root} autoComplete="off">
-                        <Grid container spacing={8} alignItems="flex-start" justify="space-between">
-                            <Grid item xs={9}>
+                        <Grid container spacing={8} alignItems="flex-end" justify="space-between">
+                            <Grid item xs={10}>
                                 <Typography variant="h5" id="form-title">
                                     Functional Assessment {this.props.score ? 'Results' : null}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={3}>
-                                <Typography variant='h6' align='right'> 
-                                    Question: {this.props.currentQuestion + 1}/{this.props.assessment.length}
-                                </Typography>
+                            <Grid item xs={2} align="right">
+                                <Button variant="outlined" size="small" onClick={() => {
+                                    this.setState({
+                                        score: ''
+                                    })
+                                    this.props.toggle()
+                                }} 
+                                    style={{minWidth: 30, padding: 2}} 
+                                    className={classes.button}>
+                                    X
+                                </Button>
                             </Grid>
                         </Grid>
                                 {!this.props.score ? 
                                     <Grid container spacing ={8}>
-                                    <Grid item xs={6} style={{minHeight: 100}}>
-                                    {
-                                        <Typography variant="h6" style={{marginTop: 4, marginLeft: 12}}>{this.props.question.text}</Typography>
-                                    }
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <Select value={this.state.score}
-                                            onChange={this.handleChange}
-                                            displayEmpty
-                                            name="question-select"
-                                            className={classes.selectEmpty}
-                                            style = {{marginTop: 0, marginLeft: 8, minWidth: 265}}>
-                                                <MenuItem value="" disabled>Select Aptitude Level</MenuItem>
-                                                <MenuItem value={3}>Dependent = 3</MenuItem>
-                                                <MenuItem value={2}>Requires assistance = 2</MenuItem>
-                                                <MenuItem value={1}>Has difficulty but does by self = 1</MenuItem>
-                                                <MenuItem value={0}>Normal = 0</MenuItem>
-                                                <MenuItem value={0}>Never did [the activity] but could do now = 0</MenuItem>
-                                                <MenuItem value = {1}>Never did and would have difficulty now = 1 </MenuItem>
-                                        </Select>
-                                        <FormHelperText style = {{marginLeft: 8}}>Choose option most in line with patient's abilities</FormHelperText>
-                                    </Grid>
+                                        <Grid item xs={12}>
+                                            <Typography variant="body2" align="justify"><strong>Instructions:</strong> Have the subject describe their capacity to perform activities in the following
+                                                aspects of daily life. If they perform the activities ask them if they do so on their own or with help. See if the patient can recall
+                                                specific instances of the activity and when they last performed it. Select a score in line with their stated abilities.
+                                            </Typography>
+                                        </Grid>
+
+                                        <Grid item xs={12} align="left" style={{paddingBottom: 0}}>
+                                            <Typography variant='subheading' color="primary"> 
+                                                Activity: {this.props.currentQuestion + 1}/{this.props.assessment.length}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={6} align="left" style={{paddingTop: 0, minHeight: 70}}>
+                                        {
+                                            <Typography variant="h6">{this.props.question.text}</Typography>
+                                        }
+                                        </Grid>
+                                        <Grid item xs={6} align="right">
+                                            <Select value={this.state.score}
+                                                onChange={this.handleChange}
+                                                displayEmpty
+                                                name="question-select"
+                                                className={classes.selectEmpty}
+                                                style = {{marginTop: 0, marginLeft: 8, minWidth: 265}}>
+                                                    <MenuItem value="" disabled>Select Aptitude Level</MenuItem>
+                                                    <MenuItem value={3}>Dependent = 3</MenuItem>
+                                                    <MenuItem value={2}>Requires assistance = 2</MenuItem>
+                                                    <MenuItem value={1}>Has difficulty but does by self = 1</MenuItem>
+                                                    <MenuItem value={0}>Normal = 0</MenuItem>
+                                                    <MenuItem value={0}>Never did [the activity] but could do now = 0</MenuItem>
+                                                    <MenuItem value = {1}>Never did and would have difficulty now = 1 </MenuItem>
+                                            </Select>
+                                            <FormHelperText style={{textAlign: "right"}}>Choose option most in line with patient's abilities</FormHelperText>
+                                        </Grid>
                                     </Grid> 
                                     :
                                     <ResultTable/>
                                 }
-                        <Grid container spacing={8} alignItems="flex-end" justify="space-between">
-                            <Grid item xs={8}>
+                        <Grid container spacing={16} alignItems="flex-end" justify="space-between">
+                            <Grid item xs={8} align="left">
                                 <Button color="secondary" style={{marginBottom: 0, marginTop: 16}} onClick={() => {
-                                    this.props.resetTest()}} 
+                                    this.props.resetTest()
+                                    this.setState({
+                                        score:''
+                                    })}} 
                                     className={classes.button}>
                                     Restart/Test
                                 </Button>

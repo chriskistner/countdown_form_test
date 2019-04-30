@@ -49,16 +49,25 @@ const styles = theme => ({
     render() {
         const { classes } = this.props;
         return (
-                <div style={{top: `50%`,left: `50%`, transform: `translate(-50%, -50%)`,}} className={classes.paper}>
-                    <Grid container spacing={8} alignItems="flex-start" justify="space-between">
-                        <Grid item xs={12}>
-                            <Typography variant="h6" id="form-title">
+                <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -25%)`,}} className={classes.paper}>
+                    <Grid container spacing={8} alignItems="flex-end" justify="space-between">
+                        <Grid item xs={10}>
+                            <Typography variant="h5" id="form-title">
                                 Cognitive Assement
                             </Typography>
                         </Grid>
+                        <Grid item xs={2} align="right">
+                            <Button variant="outlined" size="small" onClick={() => {
+                                    this.props.toggle()
+                                }} 
+                                style={{minWidth: 30, padding: 2}} 
+                                className={classes.button}>
+                                    X
+                                </Button>
+                        </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1" style={{marginLeft: 8, marginTop: 8}}>
-                                Instruct the patient to name as many animals they can in 60 seconds. Clearly say "Begin", and hit the Start Test button. <strong>Do not count repeat animals.</strong>
+                            <Typography variant="body1" align="justify">
+                                <strong>Instructions:</strong> Instruct the patient to name as many animals they can in 60 seconds. Clearly say "Begin", and hit the Start Test button. <strong>Do not count repeat animals.</strong>
                             </Typography>
                         </Grid>
                         {!this.props.testOn ?

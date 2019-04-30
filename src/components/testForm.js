@@ -79,6 +79,7 @@ const styles = theme => ({
                     aria-describedby="simple-modal-description"
                     open={this.state.modal}
                     onClose={() => {this.toggleModal()}}
+                    disableBackdropClick={true}
                     >
                         <this.state.assessment toggle= {this.toggleModal}/>
                     </Modal>
