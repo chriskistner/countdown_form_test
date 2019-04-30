@@ -4,7 +4,7 @@ const assessment= [
     {number: 1, text: "Writing checks, paying bills, balancing checkbook", score: null},
     {number: 2, text: "Assembling tax records, business affairs, or papers.", score: null},
     {number: 3, text: "Shopping alone for clothes, household necessities, or groceries.", score: null},
-    {number: 4, text: "playing a game of skill, working on a hobby."},
+    {number: 4, text: "Playing a game of skill, working on a hobby."},
     {number: 5, text: "Heating water, making a cup of coffee, turning off stove after use.", score: null},
     {number: 6, text: "Preparing a balanced meal.", score: null},
     {number: 7, text: "Keeping track of current events.", score: null},

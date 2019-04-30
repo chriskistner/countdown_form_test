@@ -20,7 +20,7 @@ import {
 const styles = theme => ({
   paper: {
     position: 'absolute',
-    width: theme.spacing.unit * 70,
+    width: theme.spacing.unit * 90,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 2,
@@ -43,9 +43,7 @@ const styles = theme => ({
         super(props)
 
         this.state = {
-            score: '',
-            name: 'hai',
-            labelWidth: 0,
+            score: ''
          }
     };
 
@@ -57,10 +55,6 @@ const styles = theme => ({
         this.setState({ score: event.target.value });
       };
 
-    componentDidUpdate = () => {
-
-    };
-
     render() {
         const { classes } = this.props;
         return (
@@ -68,19 +62,21 @@ const styles = theme => ({
                     <form className={classes.root} autoComplete="off">
                         <Grid container spacing={8} alignItems="flex-start" justify="space-between">
                             <Grid item xs={9}>
-                                <Typography variant="h6" id="form-title">
-                                    Functional Assessment
+                                <Typography variant="h5" id="form-title">
+                                    Functional Assessment {this.props.score ? 'Results' : null}
                                 </Typography>
                             </Grid>
                             <Grid item xs={3}>
-                                <Typography> Question: <strong>{this.props.currentQuestion + 1}/{this.props.assessment.length}</strong></Typography>
+                                <Typography variant='h6' align='right'> 
+                                    Question: {this.props.currentQuestion + 1}/{this.props.assessment.length}
+                                </Typography>
                             </Grid>
                         </Grid>
                                 {!this.props.score ? 
                                     <Grid container spacing ={8}>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} style={{minHeight: 100}}>
                                     {
-                                        <Typography variant="body1" style={{marginTop: 4, marginLeft: 12}}><strong>{this.props.question.text}</strong></Typography>
+                                        <Typography variant="h6" style={{marginTop: 4, marginLeft: 12}}>{this.props.question.text}</Typography>
                                     }
                                     </Grid>
                                     <Grid item xs={6}>
@@ -89,7 +85,7 @@ const styles = theme => ({
                                             displayEmpty
                                             name="question-select"
                                             className={classes.selectEmpty}
-                                            style = {{marginTop: 0, marginLeft: 8}}>
+                                            style = {{marginTop: 0, marginLeft: 8, minWidth: 265}}>
                                                 <MenuItem value="" disabled>Select Aptitude Level</MenuItem>
                                                 <MenuItem value={3}>Dependent = 3</MenuItem>
                                                 <MenuItem value={2}>Requires assistance = 2</MenuItem>
@@ -105,14 +101,15 @@ const styles = theme => ({
                                     <ResultTable/>
                                 }
                         <Grid container spacing={8} alignItems="flex-end" justify="space-between">
-                            <Grid item xs={6}>
+                            <Grid item xs={8}>
                                 <Button color="secondary" style={{marginBottom: 0, marginTop: 16}} onClick={() => {
                                     this.props.resetTest()}} 
                                     className={classes.button}>
                                     Restart/Test
                                 </Button>
                             </Grid>
-                            {this.props.currentQuestion + 1 !== this.props.assessment.length ?<Grid item xs={6}>
+                            {this.props.currentQuestion + 1 !== this.props.assessment.length ?
+                                <Grid item xs={4} align="right">
                                 {this.state.score !== '' ? 
                                     <Button variant="contained" onClick={() => {
                                         this.props.scoreQuestion(this.state.score);
@@ -134,15 +131,25 @@ const styles = theme => ({
                                 }
                             </Grid>
                             :
-                            <Grid item xs={6}>
-                                <Button variant="contained" onClick={() => {
-                                    this.props.scoreQuestion(this.state.score);
-                                    this.props.tallyScore()
+                            <Grid item xs={4} align="right">
+                                {!this.props.score ?
+                                    <Button variant="contained" onClick={() => {
+                                        this.props.scoreQuestion(this.state.score);
+                                        this.props.tallyScore()
+                                        }}
+                                        color="primary" 
+                                        className={classes.button}>
+                                            Finish
+                                    </Button> 
+                                :
+                                    <Button variant="contained" onClick={() => {
+                                        this.props.toggle()
                                     }}
-                                    color="primary" 
+                                    color="primary"
                                     className={classes.button}>
-                                        Finish
-                                </Button> 
+                                        Submit
+                                    </Button>
+                                }
                             </Grid>}
                         </Grid>
                     </form>
