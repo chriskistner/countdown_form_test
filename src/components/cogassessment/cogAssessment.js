@@ -49,7 +49,7 @@ const styles = theme => ({
     render() {
         const { classes } = this.props;
         return (
-                <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -50%)`,}} className={classes.paper}>
+                <div style={{top: `50%`,left: `50%`, transform: `translate(-50%, -50%)`,}} className={classes.paper}>
                     <Grid container spacing={8} alignItems="flex-start" justify="space-between">
                         <Grid item xs={12}>
                             <Typography variant="h6" id="form-title">

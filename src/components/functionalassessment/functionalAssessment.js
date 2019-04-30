@@ -64,7 +64,7 @@ const styles = theme => ({
     render() {
         const { classes } = this.props;
         return (
-                <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -50%)`,}} className={classes.paper}>
+                <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -25%)`}} className={classes.paper}>
                     <form className={classes.root} autoComplete="off">
                         <Grid container spacing={8} alignItems="flex-start" justify="space-between">
                             <Grid item xs={9}>
@@ -104,7 +104,7 @@ const styles = theme => ({
                                     :
                                     <ResultTable/>
                                 }
-                        <Grid container spacing={8}>
+                        <Grid container spacing={8} alignItems="flex-end" justify="space-between">
                             <Grid item xs={6}>
                                 <Button color="secondary" style={{marginBottom: 0, marginTop: 16}} onClick={() => {
                                     this.props.resetTest()}} 
@@ -112,7 +112,7 @@ const styles = theme => ({
                                     Restart/Test
                                 </Button>
                             </Grid>
-                            {this.props.currentQuestion + 1 !== this.props.assessment.length ?<Grid item xs={6} alignItems="flex-end" justify="space-between">
+                            {this.props.currentQuestion + 1 !== this.props.assessment.length ?<Grid item xs={6}>
                                 {this.state.score !== '' ? 
                                     <Button variant="contained" onClick={() => {
                                         this.props.scoreQuestion(this.state.score);
@@ -134,7 +134,7 @@ const styles = theme => ({
                                 }
                             </Grid>
                             :
-                            <Grid item xs={6} alignItems="flex-end" justify="space-between">
+                            <Grid item xs={6}>
                                 <Button variant="contained" onClick={() => {
                                     this.props.scoreQuestion(this.state.score);
                                     this.props.tallyScore()
