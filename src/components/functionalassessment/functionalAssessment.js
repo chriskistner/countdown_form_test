@@ -57,6 +57,7 @@ const styles = theme => ({
 
     render() {
         const { classes } = this.props;
+        console.log(this.state.score)
         return (
                 <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -25%)`}} className={classes.paper}>
                     <form className={classes.root} autoComplete="off">
@@ -132,7 +133,6 @@ const styles = theme => ({
                             </Grid>
                             {this.props.currentQuestion + 1 !== this.props.assessment.length ?
                                 <Grid item xs={4} align="right">
-                                {this.state.score !== '' ? 
                                     <Button variant="contained" onClick={() => {
                                         this.props.scoreQuestion(this.state.score);
                                         this.props.nextQuestion();
@@ -140,25 +140,20 @@ const styles = theme => ({
                                             score: ''
                                         })
                                     }}
+                                        disabled={this.state.score !== '' ? false : true}
                                         color="primary" 
                                         className={classes.button}>
                                             Next Question
                                     </Button> 
-                                    :
-                                    <Button disabled variant="contained"
-                                        color="primary" 
-                                        className={classes.button}>
-                                            Next Question
-                                    </Button> 
-                                }
                             </Grid>
                             :
                             <Grid item xs={4} align="right">
-                                {!this.props.score ?
+                                {!this.props.score  ?
                                     <Button variant="contained" onClick={() => {
                                         this.props.scoreQuestion(this.state.score);
                                         this.props.tallyScore()
                                         }}
+                                        disabled={this.state.score !== '' ? false : true}
                                         color="primary" 
                                         className={classes.button}>
                                             Finish
