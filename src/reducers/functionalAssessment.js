@@ -1,4 +1,4 @@
-import {NEXT_QUESTION, SCORE_QUESTION, RESET_TEST, TALLY_SCORE} from '../actions/functionalAssessment';
+import {START_FUNC, END_FUNC, NEXT_QUESTION, SCORE_QUESTION, RESET_FUNC, TALLY_SCORE} from '../actions/functionalAssessment';
 
 const assessment= [
     {number: 1, text: "Writing checks, paying bills, balancing checkbook", score: null},
@@ -19,13 +19,20 @@ const initialState = {
     question: assessment[0],
     currentQuestion: 0,
     score: null,
-    startTime: null,
-    endTime: null,
-    testComp: false
+    startFunc: null,
+    endFunc: null,
 };
 
 export default function functionForm(state=initialState, action) {
     switch(action.type) {
+
+        case START_FUNC:
+            const testInit = new Date();
+            return {...state, startFunc: testInit};
+
+        case END_FUNC:
+            const testConc = new Date();
+            return {...state, endFunc: testConc};
 
         case NEXT_QUESTION:
             let nextQuestion = state.currentQuestion += 1
@@ -40,7 +47,7 @@ export default function functionForm(state=initialState, action) {
             const total = assessment.reduce((a, b) => a + b.score, 0)
             return {...state, score: total}
 
-        case RESET_TEST:
+        case RESET_FUNC:
             return state = initialState;
 
         default:

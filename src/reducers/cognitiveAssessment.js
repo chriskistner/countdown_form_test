@@ -1,28 +1,28 @@
-import {START_TEST, TICK_UP, RESET_TEST, RESET_TICK_UP, TEST_BEGAN, TEST_ENDED} from '../actions/cognitiveAssessment';
+import {START_TEST, TICK_UP, RESTART_COG, RESET_COG, RESET_TICK_UP, BEGIN_COG, END_COG} from '../actions/cognitiveAssessment';
 
 const initialState = {
     timer: 10,
     testOn: false,
     score: 0,
     attempts: 1,
-    startTime: null,
-    endTime: null,
+    startCog: null,
+    endCog: null,
     testComp: false
 };
 
 export default function cogForm(state=initialState, action) {
     switch(action.type) {
 
-        case TEST_BEGAN:
-            if (!state.startTime) {
+        case BEGIN_COG:
+            if (!state.startCog) {
                 const testInit = new Date();
-                return {...state, startTime: testInit};
+                return {...state, startCog: testInit};
             }
             return state
 
-        case TEST_ENDED:
+        case END_COG:
             const testConc = new Date();
-            return {...state, endTime: testConc, testComp: true};
+            return {...state, endCog: testConc, testComp: true};
 
         case START_TEST:
             let newTime;
@@ -35,8 +35,11 @@ export default function cogForm(state=initialState, action) {
         case RESET_TICK_UP:
             return {...state, attempts: state.attempts +=1};
 
-        case RESET_TEST:
+        case RESTART_COG:
             return state = {...state, timer: 10, testOn: false, score: 0, testComp: false};
+
+        case RESET_COG:
+            return state = initialState;
 
         default:
             return state;

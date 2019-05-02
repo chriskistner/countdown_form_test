@@ -8,10 +8,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { startTest, 
         tickUp, 
-        resetTest, 
+        resetCog,
+        restartCog, 
         resetTickUp, 
-        testBegan, 
-        testEnded } from '../../actions/cognitiveAssessment';
+        beginCog, 
+        endCog } from '../../actions/cognitiveAssessment';
 
 const styles = theme => ({
   paper: {
@@ -37,7 +38,7 @@ const styles = theme => ({
     };
 
     componentDidMount = () => {
-        this.props.resetTest();
+        this.props.resetCog();
     };
 
     componentDidUpdate = () => {
@@ -73,7 +74,7 @@ const styles = theme => ({
                         {!this.props.testOn ?
                             <Grid item xs={4}> 
                                 <Button variant="contained" onClick={() => {
-                                    this.props.testBegan()
+                                    this.props.beginCog()
                                     this.setState({intervalID: setInterval(this.props.startTest, 1000)})}} 
                                     className={classes.button}>
                                     Start Test
@@ -111,7 +112,7 @@ const styles = theme => ({
                                 <Button color="secondary" style={{padding:0}} onClick={() => {
                                     clearInterval(this.state.intervalID);
                                     this.props.resetTickUp()
-                                    this.props.resetTest()}} 
+                                    this.props.restartCog()}} 
                                     className={classes.button}>
                                     Stop/Reset
                                 </Button>
@@ -119,7 +120,7 @@ const styles = theme => ({
                             {this.props.timer < 1 ? 
                             <Grid item xs={2}>
                                 <Button variant="contained" onClick={() => {
-                                    this.props.testEnded()
+                                    this.props.endCog()
                                     this.props.toggle()}}  
                                     color="primary">
                                         SUBMIT
@@ -145,10 +146,11 @@ const mapStateToProps = (state) => (state.cog)
     return bindActionCreators(
         {startTest, 
         tickUp, 
-        resetTest, 
+        resetCog,
+        restartCog, 
         resetTickUp, 
-        testBegan, 
-        testEnded}, dispatch)
+        beginCog, 
+        endCog}, dispatch)
   };
 
 const CogAssessmentWrapped = withStyles(styles)(CogAssessment)

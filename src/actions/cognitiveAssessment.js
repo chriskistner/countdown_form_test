@@ -3,58 +3,53 @@ const url = process.env.REACT_APP_API_URL;
 
 export const START_TEST = "START_TEST";
 export const TICK_UP = "TICK_UP";
-export const RESET_TEST = "RESET_TEST";
+export const RESET_COG = "RESET_COG";
+export const RESTART_COG = "RESTART_COG";
 export const FETCH_USER = "FECTH_USER";
 export const RESET_TICK_UP = "RESET_TICK_UP";
-export const TEST_BEGAN = "TEST_BEGAN";
-export const TEST_ENDED = "TEST_ENDED";
+export const BEGIN_COG = "BEGIN_COG";
+export const END_COG = "END_COG";
 
 
 export const startTest = () => {
     return (dispatch) => {
-        dispatch({
-            type: START_TEST
-        })
+        dispatch({type: START_TEST})
     }
 };
 
 export const tickUp = () => {
     return (dispatch) => {
-        dispatch({
-            type: TICK_UP
-        })
+        dispatch({type: TICK_UP})
     }
 };
 
-export const resetTest = () => {
+export const resetCog = () => {
     return (dispatch) => {
-        dispatch({
-            type: RESET_TEST
-        })
+        dispatch({type: RESET_COG})
+    }
+};
+
+export const restartCog = () => {
+    return (dispatch) => {
+        dispatch({type: RESTART_COG})
     }
 };
 
 export const resetTickUp = () => {
     return (dispatch) => {
-        dispatch({
-            type: RESET_TICK_UP
-        })
+        dispatch({type: RESET_TICK_UP})
     }
 };
 
-export const testBegan = () => {
+export const beginCog = () => {
     return (dispatch) => {
-        dispatch({
-            type: TEST_BEGAN
-        })
+        dispatch({type: BEGIN_COG})
     }
 };
 
-export const testEnded = () => {
+export const endCog = () => {
     return (dispatch) => {
-        dispatch({
-            type: TEST_ENDED
-        })
+        dispatch({type: END_COG})
     }
 };
 

@@ -11,10 +11,12 @@ import ResultTable from './functionalResultTable';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
+    startFunc,
+    endFunc,
     nextQuestion,
     scoreQuestion,
     tallyScore,
-    resetTest
+    resetFunc
 } from '../../actions/functionalAssessment';
 
 const styles = theme => ({
@@ -48,7 +50,8 @@ const styles = theme => ({
     };
 
     componentDidMount = () => {
-
+        this.props.resetFunc();
+        this.props.startFunc();
     };
 
     handleChange = event => {
@@ -57,10 +60,8 @@ const styles = theme => ({
 
     render() {
         const { classes } = this.props;
-        console.log(this.state.score)
         return (
                 <div style={{top: `25%`,left: `50%`, transform: `translate(-50%, -25%)`}} className={classes.paper}>
-                    <form className={classes.root} autoComplete="off">
                         <Grid container spacing={8} alignItems="flex-end" justify="space-between">
                             <Grid item xs={10}>
                                 <Typography variant="h5" id="form-title">
@@ -123,7 +124,7 @@ const styles = theme => ({
                         <Grid container spacing={16} alignItems="flex-end" justify="space-between">
                             <Grid item xs={8} align="left">
                                 <Button color="secondary" style={{marginBottom: 0, marginTop: 16}} onClick={() => {
-                                    this.props.resetTest()
+                                    this.props.resetFunc()
                                     this.setState({
                                         score:''
                                     })}} 
@@ -138,8 +139,7 @@ const styles = theme => ({
                                         this.props.nextQuestion();
                                         this.setState({
                                             score: ''
-                                        })
-                                    }}
+                                            })}}
                                         disabled={this.state.score !== '' ? false : true}
                                         color="primary" 
                                         className={classes.button}>
@@ -160,7 +160,8 @@ const styles = theme => ({
                                     </Button> 
                                 :
                                     <Button variant="contained" onClick={() => {
-                                        this.props.toggle()
+                                        this.props.toggle();
+                                        this.props.endFunc();
                                     }}
                                     color="primary"
                                     className={classes.button}>
@@ -169,7 +170,7 @@ const styles = theme => ({
                                 }
                             </Grid>}
                         </Grid>
-                    </form>
+
                 </div>
         )
     }
@@ -184,9 +185,11 @@ const mapStateToProps = (state) => (state.functional)
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
-        {nextQuestion,
+        {startFunc,
+        endFunc,
+        nextQuestion,
         scoreQuestion,
-        resetTest,
+        resetFunc,
         tallyScore
         }, dispatch)
   };

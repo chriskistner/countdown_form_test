@@ -10,13 +10,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CogAssessment from './cogassessment/cogAssessment';
 import FunctionalAssessment from './functionalassessment/functionalAssessment';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import {startTest, 
-        tickUp, 
-        resetTest, 
-        resetTickUp, 
-        testBegan, 
-        testEnded } from '../actions/cognitiveAssessment';
 
 const styles = theme => ({
   paper: {
@@ -66,14 +59,14 @@ const styles = theme => ({
         this.setState({
             assessment: Component
         })
-    }
+    };
 
     render() {
         const { classes } = this.props;
         return (
             <div>
-                <Button onClick={() => {this.renderModal(CogAssessment); this.toggleModal(); this.props.resetTest()}}>Cognitive Assessment</Button>
-                <Button onClick={() => {this.renderModal(FunctionalAssessment); this.toggleModal(); this.props.resetTest()}}>Functional Assessment</Button>
+                <Button onClick={() => {this.renderModal(CogAssessment); this.toggleModal()}}>Cognitive Assessment</Button>
+                <Button onClick={() => {this.renderModal(FunctionalAssessment); this.toggleModal()}}>Functional Assessment</Button>
                     <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
@@ -90,10 +83,10 @@ const styles = theme => ({
                             Cognitive Assessment Results
                         </Typography>
                         <Typography variant="body1">
-                            <strong>Test Started:</strong> {this.renderTime(this.props.cognitive.startTime)}
+                            <strong>Test Started:</strong> {this.renderTime(this.props.cognitive.startCog)}
                         </Typography>
                         <Typography variant="body1">
-                            <strong>Date Submitted:</strong> {this.renderTime(this.props.cognitive.endTime)}
+                            <strong>Date Submitted:</strong> {this.renderTime(this.props.cognitive.endCog)}
                         </Typography>
                         <Typography variant="body1">
                             <strong>Score:</strong> {this.props.cognitive.score}
@@ -123,16 +116,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-  const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {startTest, 
-        tickUp, 
-        resetTest, 
-        resetTickUp, 
-        testBegan, 
-        testEnded}, dispatch)
-  };
-
 const TestFormWrapped = withStyles(styles)(TestForm)
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestFormWrapped);
+export default connect(mapStateToProps, null)(TestFormWrapped);
