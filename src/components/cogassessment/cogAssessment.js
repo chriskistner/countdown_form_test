@@ -25,7 +25,23 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
-  }
+  },
+  startButton: {
+      margin: theme.spacing.unit,
+      borderRadius: 50,
+      minWidth: 103,
+      minHeight: 103,
+      fontSize: 20,
+      backgroundColor: '#4CAF50',
+  },
+  countButton: {
+    margin: theme.spacing.unit,
+    borderRadius: 50,
+    minWidth: 103,
+    minHeight: 103,
+    fontSize: 20,
+    backgroundColor: 'primary.main',
+    }
 });
 
  class CogAssessment extends Component {
@@ -54,7 +70,7 @@ const styles = theme => ({
                     <Grid container spacing={8} alignItems="flex-end" justify="space-between">
                         <Grid item xs={10}>
                             <Typography variant="h5" id="form-title">
-                                Cognitive Assement
+                                Cognitive Assement: Naming Test
                             </Typography>
                         </Grid>
                         <Grid item xs={2} align="right">
@@ -71,41 +87,43 @@ const styles = theme => ({
                                 <strong>Instructions:</strong> Instruct the patient to name as many animals they can in 60 seconds. Clearly say "Begin", and hit the Start Test button. <strong>Do not count repeat animals.</strong>
                             </Typography>
                         </Grid>
-                        {!this.props.testOn ?
-                            <Grid item xs={4}> 
-                                <Button variant="contained" onClick={() => {
-                                    this.props.beginCog()
-                                    this.setState({intervalID: setInterval(this.props.startTest, 1000)})}} 
-                                    className={classes.button}>
-                                    Start Test
-                                </Button>
-                            </Grid> 
-                            :
-                            <Grid item xs={4}> 
-                                {this.props.timer > 0 ? 
+                        <Grid container spacing={8}  alignItems="center" justify="space-between">
+                            <Grid item xs={5} align="center">
+                                <Typography variant="h6">
+                                    <u>Seconds Left</u>
+                                </Typography>
+                                <Typography variant="h4">
+                                    {this.props.timer}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={4} align="center">
+                                <Typography variant="h6">
+                                    <u>Score</u>
+                                </Typography>
+                                <Typography variant="h4">
+                                    {this.props.score}
+                                </Typography>
+                            </Grid>
+                            {!this.props.testOn ?
+                                <Grid item xs={3} borderBottom={1}> 
                                     <Button variant="contained" onClick={() => {
-                                        this.props.tickUp()}} color="primary" 
-                                        className={classes.button}>
-                                        Count Animal
-                                    </Button> 
-                                    :
-                                    <Button variant="contained" disabled onClick={() => {
-                                        this.props.tickUp()}} color="secondary" 
-                                        className={classes.button}>
-                                        Test Complete
+                                        this.props.beginCog()
+                                        this.setState({intervalID: setInterval(this.props.startTest, 1000)})}}
+                                        border={1} 
+                                        className={classes.startButton}>
+                                        Start
                                     </Button>
-                                    }
+                                </Grid> 
+                                :
+                                <Grid item xs={3}> 
+                                    <Button variant="contained" onClick={() => {
+                                        this.props.tickUp()}} color="primary"
+                                        disabled={this.props.timer > 0 ? false : true} 
+                                        className={classes.countButton}>
+                                        Count
+                                    </Button> 
                                 </Grid>
-                        }
-                        <Grid item xs={4}>
-                            <Typography variant="h6">
-                                {this.props.timer} Seconds Left
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Typography variant="h6">
-                                {this.props.score} Score
-                            </Typography>
+                            }
                         </Grid>
                         <Grid container spacing={8} alignItems="flex-end" justify="space-between">
                             <Grid item xs={4}>
