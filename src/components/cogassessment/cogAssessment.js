@@ -117,7 +117,8 @@ const styles = theme => ({
                                 :
                                 <Grid item xs={3}> 
                                     <Button variant="contained" onClick={() => {
-                                        this.props.tickUp()}} color="primary"
+                                        this.props.tickUp()}} 
+                                        color= "primary"
                                         disabled={this.props.timer > 0 ? false : true} 
                                         className={classes.countButton}>
                                         Count

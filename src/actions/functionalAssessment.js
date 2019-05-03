@@ -48,13 +48,13 @@ export const endFunc = () => {
     }
 };
 
-export function submitFunctional(assessment, score, testStart, testSubmitted) {
+export function submitFunctional(assessment, score, testStart, testEnd) {
     return async () => {
         try {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('jwt_access_token');
             const user = localStorage.getItem('user')
             const patientID = this.props.match.params.patient;
-            await axios(`${url}/placeholder`,
+            await axios(`${url}/cog`,
             {
                 method: "post",
                 headers: {
@@ -63,14 +63,16 @@ export function submitFunctional(assessment, score, testStart, testSubmitted) {
                   'Authorization': `Bearer ${token}`
                 },
                 data: {
-                    userId: user,
-                    uuid: patientID,
-                    cognitiveTestType: 'Functional',
+                    timestamp: new Date().getTime(),
+                    timeZoneOffset: 330,
+                    reporter: user,
+                    patientUuid: patientID,
+                    testType: 'Functional',
                     version: 'func-v1',
                     assessment: assessment,
                     score: score,
-                    start: testStart,
-                    submission: testSubmitted
+                    testStart,
+                    testEnd
                 }
               });
         } catch (err) {
