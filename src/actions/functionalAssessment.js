@@ -48,12 +48,13 @@ export const endFunc = () => {
     }
 };
 
-export function submitFunctional(assessment, score, testStart, testEnd) {
+export function submitFunctional(assessment, total, startTime, endTime, elapsedTime) {
     return async () => {
         try {
             const token = localStorage.getItem('jwt_access_token');
-            const user = localStorage.getItem('user')
-            const patientID = this.props.match.params.patient;
+            const reporter = localStorage.getItem('user')
+            const patientUuid= this.props.match.params.patient;
+            const timezoneOffset = new Date().getTimezoneOffset()
             await axios(`${url}/cog`,
             {
                 method: "post",
@@ -64,15 +65,25 @@ export function submitFunctional(assessment, score, testStart, testEnd) {
                 },
                 data: {
                     timestamp: new Date().getTime(),
-                    timeZoneOffset: 330,
-                    reporter: user,
-                    patientUuid: patientID,
+                    startTime,
+                    endTime,
+                    timezoneOffset,
+                    reporter,
+                    patientUuid,
                     testType: 'Functional',
                     version: 'func-v1',
-                    assessment: assessment,
-                    score: score,
-                    testStart,
-                    testEnd
+                    elapsedTime,
+                    q1: assessment[0].score,
+                    q2: assessment[1].score,
+                    q3: assessment[2].score,
+                    q4: assessment[3].score,
+                    q5: assessment[4].score,
+                    q6: assessment[5].score,
+                    q7: assessment[6].score,
+                    q8: assessment[7].score,
+                    q9: assessment[8].score,
+                    q10: assessment[9].score,
+                    total
                 }
               });
         } catch (err) {

@@ -21,18 +21,20 @@ const initialState = {
     score: null,
     startFunc: null,
     endFunc: null,
+    elapsedTime: null
 };
 
 export default function functionForm(state=initialState, action) {
     switch(action.type) {
 
         case START_FUNC:
-            const testInit = new Date().getTime();
-            return {...state, startFunc: testInit};
+            const startFunc = new Date().getTime();
+            return {...state, startFunc};
 
         case END_FUNC:
-            const testConc = new Date().getTime();
-            return {...state, endFunc: testConc};
+            const endFunc = new Date().getTime();
+            const elapsedTime = Math.round((endFunc - state.startFunc) / 1000);
+            return {...state, endFunc, elapsedTime};
 
         case NEXT_QUESTION:
             let nextQuestion = state.currentQuestion += 1

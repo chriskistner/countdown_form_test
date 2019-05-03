@@ -35,35 +35,33 @@ describe('Functional Assessment Handler', () => {
   });
 
   it('Post Cognitive Test', async () => {
-    let startTime = new Date();
-    let endTime = new Date();
-    endTime.setMinutes(endTime.getMinutes() + 3);
-    
-    const assessment= [
-      {number: 1, text: "Writing checks, paying bills, balancing checkbook", score: null},
-      {number: 2, text: "Assembling tax records, business affairs, or papers.", score: null},
-      {number: 3, text: "Shopping alone for clothes, household necessities, or groceries.", score: null},
-      {number: 4, text: "Playing a game of skill, working on a hobby."},
-      {number: 5, text: "Heating water, making a cup of coffee, turning off stove after use.", score: null},
-      {number: 6, text: "Preparing a balanced meal.", score: null},
-      {number: 7, text: "Keeping track of current events.", score: null},
-      {number: 8, text: "Paying attention to, understanding, discussing TV book, magazine.", score: null},
-      {number: 9, text: "Remembering appointments, family occasions, holidays, medications", score: null},
-      {number: 10, text: "Traveling out of neighborhood, driving, arranging to take busess", score: null }
-    ];
+    let startTime = new Date().getTime();
+    let endTime = new Date().getTime();
+    endTime += 300000;
 
-
+    let elapsedTime = Math.round((endTime - startTime) / 1000);
+ 
     const request = {
       timestamp: new Date().getTime(),
-      endTime: endTime,
-      start: startTime,
+      endTime,
+      startTime,
       timezoneOffset,
       reporter: adminUser.uuid,
       patientUuid: adminUser.uuid,
       testType: 'Functional',
       version: 'func-v1',
-      attempts: 2,
-      score: 15
+      elapsedTime,
+      q1: 0,
+      q2: 1,
+      q3: 2,
+      q4: 0,
+      q5: 0,
+      q6: 1,
+      q7: 2,
+      q8: 1,
+      q9: 1,
+      q10: 1,
+      total: 9
     };
 
     const result = await axios.post("/cog", request)
@@ -77,21 +75,33 @@ describe('Functional Assessment Handler', () => {
   });
 
   it('List Tests, non empty', async () => {
-    let startTime = new Date();
-    let endTime = new Date();
-    endTime.setMinutes(endTime.getMinutes() + 3);
+    let startTime = new Date().getTime();
+    let endTime = new Date().getTime();
+    endTime += 300000;
+
+    let elapsedTime = Math.round((endTime - startTime) / 1000);
 
     const request = {
       timestamp: new Date().getTime(),
-      endTime: endTime,
-      start: startTime,
+      endTime,
+      startTime,
       timezoneOffset,
       reporter: adminUser.uuid,
       patientUuid: adminUser.uuid,
-      testType: 'Cognitive',
-      version: 'naming-animals-v1',
-      attempts: 2,
-      score: 15
+      testType: 'Functional',
+      version: 'func-v1',
+      elapsedTime,
+      q1: 0,
+      q2: 1,
+      q3: 2,
+      q4: 0,
+      q5: 0,
+      q6: 1,
+      q7: 2,
+      q8: 1,
+      q9: 1,
+      q10: 1,
+      score: 9
     };
 
     await axios.post("/cog", request);

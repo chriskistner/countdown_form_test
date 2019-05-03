@@ -41,13 +41,14 @@ describe('Cognitive Assessment Handler', () => {
 
     const request = {
       timestamp: new Date().getTime(),
-      endTime: endTime,
-      start: startTime,
+      endTime,
+      startTime,
       timezoneOffset,
       reporter: adminUser.uuid,
       patientUuid: adminUser.uuid,
       testType: 'Cognitive',
       version: 'naming-animals-v1',
+      elapsedTime: 97,
       attempts: 2,
       score: 15
     };
@@ -69,13 +70,14 @@ describe('Cognitive Assessment Handler', () => {
 
     const request = {
       timestamp: new Date().getTime(),
-      endTime: endTime,
-      start: startTime,
+      endTime,
+      startTime,
       timezoneOffset,
       reporter: adminUser.uuid,
       patientUuid: adminUser.uuid,
       testType: 'Cognitive',
       version: 'naming-animals-v1',
+      elapsedTime: 97,
       attempts: 2,
       score: 15
     };

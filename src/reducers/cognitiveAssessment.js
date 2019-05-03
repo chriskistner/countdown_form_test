@@ -7,8 +7,7 @@ const initialState = {
     attempts: 1,
     startCog: null,
     endCog: null,
-    elapsedTime: null,
-    testComp: false
+    elapsedTime: null
 };
 
 export default function cogForm(state=initialState, action) {
@@ -23,8 +22,8 @@ export default function cogForm(state=initialState, action) {
 
         case END_COG:
             const endCog = new Date().getTime();
-            const elapsedTime = Math.round((endCog - state.startCog) / 1000)
-            return {...state, endCog, elapsedTime, testComp: true};
+            const elapsedTime = Math.round((endCog - state.startCog) / 1000);
+            return {...state, endCog, elapsedTime};
 
         case START_TEST:
             let newTime;
