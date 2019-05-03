@@ -27,11 +27,11 @@ export default function functionForm(state=initialState, action) {
     switch(action.type) {
 
         case START_FUNC:
-            const testInit = new Date();
+            const testInit = new Date().getTime();
             return {...state, startFunc: testInit};
 
         case END_FUNC:
-            const testConc = new Date();
+            const testConc = new Date().getTime();
             return {...state, endFunc: testConc};
 
         case NEXT_QUESTION:

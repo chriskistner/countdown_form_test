@@ -23,6 +23,9 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     outline: 'none',
   },
+  header: {
+    borderBottom: '2px solid black',
+  },
   button: {
     margin: theme.spacing.unit,
   },
@@ -41,7 +44,9 @@ const styles = theme => ({
     minHeight: 103,
     fontSize: 20,
     backgroundColor: 'primary.main',
-    }
+    },
+
+
 });
 
  class CogAssessment extends Component {
@@ -87,7 +92,7 @@ const styles = theme => ({
                                 <strong>Instructions:</strong> Instruct the patient to name as many animals they can in 60 seconds. Clearly say "Begin", and hit the Start Test button. <strong>Do not count repeat animals.</strong>
                             </Typography>
                         </Grid>
-                        <Grid container spacing={8}  alignItems="center" justify="space-between">
+                        <Grid container spacing={8} alignItems="center" justify="space-between">
                             <Grid item xs={5} align="center">
                                 <Typography variant="h6">
                                     <u>Seconds Left</u>
@@ -139,7 +144,6 @@ const styles = theme => ({
                             {this.props.timer < 1 ? 
                             <Grid item xs={2}>
                                 <Button variant="contained" onClick={() => {
-                                    this.props.endCog()
                                     this.props.toggle()}}  
                                     color="primary">
                                         SUBMIT

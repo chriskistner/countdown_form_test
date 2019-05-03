@@ -2,11 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CogAssessment from './cogassessment/cogAssessment';
 import FunctionalAssessment from './functionalassessment/functionalAssessment';
 import { connect } from 'react-redux';
@@ -50,9 +47,11 @@ const styles = theme => ({
         })
     };
 
-    renderTime = (time) => {
-        if(time) {
-            return `${time.getMonth()+1}/${time.getDay()}/${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()} ${time.getTimezoneOffset()}`}
+    renderElapsedTime = () => {
+        if(this.props.cognitive.endCog) {
+
+            return `${this.props.cognitive.elapsedTime} seconds`
+        }
     };
 
     renderModal = (Component) => {
@@ -76,29 +75,6 @@ const styles = theme => ({
                     >
                         <this.state.assessment toggle= {this.toggleModal}/>
                     </Modal>
-                {this.props.cognitive.testComp ?
-                <Card className={classes.card}>
-                    <CardContent>
-                        <Typography variant= "h6" color="textSecondary" gutterBottom>
-                            Cognitive Assessment Results
-                        </Typography>
-                        <Typography variant="body1">
-                            <strong>Test Started:</strong> {this.renderTime(this.props.cognitive.startCog)}
-                        </Typography>
-                        <Typography variant="body1">
-                            <strong>Date Submitted:</strong> {this.renderTime(this.props.cognitive.endCog)}
-                        </Typography>
-                        <Typography variant="body1">
-                            <strong>Score:</strong> {this.props.cognitive.score}
-                        </Typography>
-                        <Typography variant="body1">
-                            <strong>Attempts:</strong> {this.props.cognitive.attempts}
-                        </Typography>
-                    </CardContent>
-                </Card>
-                :
-                null
-            }
           </div>
         )
     }
