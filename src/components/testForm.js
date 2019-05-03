@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -16,6 +15,7 @@ import { connect } from 'react-redux';
         this.state = {
             modal: false,
             anchorEl: null,
+            assessment: null
         }
     };
 
@@ -40,7 +40,7 @@ import { connect } from 'react-redux';
     };
 
     render() {
-        const { anchorEl } = this.state;
+        const { anchorEl} = this.state;
         return (
             <div>
                 <Button
@@ -56,11 +56,19 @@ import { connect } from 'react-redux';
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={this.handleClose}>
-                    <MenuItem onClick={() => {this.renderModal(CogAssessment); this.toggleModal(); this.handleClose()}}>Cognitive Assessment</MenuItem>
-                    <MenuItem onClick={() => {this.renderModal(FunctionalAssessment); this.toggleModal(); this.handleClose()}}>Functional Assessment</MenuItem>
+                    <MenuItem disabled>Select Test</MenuItem>
+                    <MenuItem onClick={() => {this.renderModal(CogAssessment); 
+                                                this.toggleModal(); 
+                                                this.handleClose()}}>
+                        Cognitive Assessment
+                    </MenuItem>
+                    <MenuItem onClick={() => {this.renderModal(FunctionalAssessment); 
+                                                this.toggleModal();
+                                                this.handleClose()}}>
+                        Functional Assessment
+                    </MenuItem>
                 </Menu>
-
-                    <Modal
+                <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                     open={this.state.modal}
@@ -68,16 +76,11 @@ import { connect } from 'react-redux';
                     disableBackdropClick={true}
                     >
                         <this.state.assessment toggle= {this.toggleModal}/>
-                    </Modal>
+                </Modal>
           </div>
         )
     }
 };
-
-TestForm.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-
 
 const mapStateToProps = (state) => {
     return {

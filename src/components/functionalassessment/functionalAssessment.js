@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
@@ -37,6 +39,9 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+  },
+  close: {
+    padding: theme.spacing.unit / 2,
   }
 });
 
@@ -69,16 +74,14 @@ const styles = theme => ({
                                 </Typography>
                             </Grid>
                             <Grid item xs={2} align="right">
-                                <Button variant="outlined" size="small" onClick={() => {
-                                    this.setState({
-                                        score: ''
-                                    })
-                                    this.props.toggle()
-                                }} 
-                                    style={{minWidth: 30, padding: 2}} 
-                                    className={classes.button}>
-                                    X
-                                </Button>
+                                <IconButton
+                                key="close"
+                                aria-label="Close"
+                                color="inherit"
+                                className={classes.close}
+                                onClick={() => {this.props.toggle(); this.setState({score:''})}}>
+                                    <CloseIcon />
+                                </IconButton>
                             </Grid>
                         </Grid>
                                 {!this.props.score ? 
