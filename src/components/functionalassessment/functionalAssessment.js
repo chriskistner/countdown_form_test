@@ -79,7 +79,7 @@ const styles = theme => ({
                                 aria-label="Close"
                                 color="inherit"
                                 className={classes.close}
-                                onClick={() => {this.props.toggle(); this.setState({score:''})}}>
+                                onClick={() => {this.props.modal(); this.setState({score:''})}}>
                                     <CloseIcon />
                                 </IconButton>
                             </Grid>
@@ -163,8 +163,9 @@ const styles = theme => ({
                                     </Button> 
                                 :
                                     <Button variant="contained" onClick={() => {
-                                        this.props.toggle();
                                         this.props.endFunc();
+                                        this.props.modal();
+                                        this.props.snackbar('functional');
                                     }}
                                     color="primary"
                                     className={classes.button}>

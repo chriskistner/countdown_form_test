@@ -1,7 +1,7 @@
 import {START_TEST, TICK_UP, RESTART_COG, RESET_COG, RESET_TICK_UP, BEGIN_COG, END_COG} from '../actions/cognitiveAssessment';
 
 const initialState = {
-    timer: 10,
+    timer: 60,
     testOn: false,
     score: 0,
     attempts: 1,
@@ -37,7 +37,7 @@ export default function cogForm(state=initialState, action) {
             return {...state, attempts: state.attempts +=1};
 
         case RESTART_COG:
-            return state = {...state, timer: 10, testOn: false, score: 0, testComp: false};
+            return state = {...state, timer: 60, testOn: false, score: 0, testComp: false};
 
         case RESET_COG:
             return state = initialState;
