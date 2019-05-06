@@ -10,14 +10,14 @@ import FunctionalAssessment from './functionalassessment/functionalAssessment';
 import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
 
- class TestForm extends Component {
+class TestForm extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             modal: false,
             anchorEl: null,
-            assessment: null,
+            assessment: 'default',
             snackbar: false,
             snackBarInfo: null
         }
@@ -80,12 +80,11 @@ import { Typography } from '@material-ui/core';
     };
 
     render() {
-        const { anchorEl} = this.state;
-        console.log(this.props.functional)
+        console.log(this.state.snackbar)
         return (
             <div>
                 <Button
-                aria-owns={anchorEl ? 'simple-menu' : undefined}
+                aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                 aria-haspopup="true"
                 variant="contained"
                 color="primary"
@@ -94,8 +93,8 @@ import { Typography } from '@material-ui/core';
                 </Button>
                 <Menu
                 id="simple-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
+                anchorEl={this.state.anchorEl}
+                open={Boolean(this.state.anchorEl)}
                 onClose={this.handleClose}>
                     <MenuItem disabled>Select Test</MenuItem>
                     <MenuItem onClick={() => {this.renderModal(CogAssessment); 

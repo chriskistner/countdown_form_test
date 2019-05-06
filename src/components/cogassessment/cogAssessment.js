@@ -50,8 +50,6 @@ const styles = theme => ({
     fontSize: 20,
     backgroundColor: 'primary.main',
     },
-
-
 });
 
  class CogAssessment extends Component {
